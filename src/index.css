@@ -158,3 +158,45 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* ============ Intelligence Graph Styles ============ */
+
+.intelligence-graph {
+  background: transparent !important;
+}
+
+.intelligence-graph .react-flow__edge-path {
+  filter: drop-shadow(0 0 3px hsl(280 80% 60% / 0.35));
+}
+
+.intelligence-graph .react-flow__edge.animated path {
+  stroke-dasharray: 6 3;
+  animation: edge-flow 1.2s linear infinite;
+}
+
+.intelligence-graph .react-flow__node {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.intelligence-graph .react-flow__node:hover {
+  filter: drop-shadow(0 0 8px hsl(280 80% 60% / 0.4));
+}
+
+.intelligence-graph .react-flow__node.selected-graph-node {
+  filter: drop-shadow(0 0 16px hsl(280 80% 60% / 0.6))
+         drop-shadow(0 0 32px hsl(280 80% 60% / 0.25));
+}
+
+.intelligence-graph .react-flow__minimap {
+  display: none;
+}
+
+.intelligence-graph .react-flow__panel {
+  margin: 8px;
+}
+
+@keyframes edge-flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
