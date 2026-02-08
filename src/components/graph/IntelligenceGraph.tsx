@@ -11,16 +11,27 @@ import {
   type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { PersonNode, InfoNode, InterestNode, SimilarNode } from "./CustomNodes";
+import {
+  PersonNode,
+  InfoNode,
+  InterestNode,
+  SimilarNode,
+  CompanyNode,
+  CommStyleNode,
+} from "./CustomNodes";
 import { generateGraphData } from "./graphUtils";
 import { GenerateResponse } from "@/types/outreach";
 import { Network, Loader2 } from "lucide-react";
 
+// CRITICAL: nodeTypes must be defined outside the component to prevent
+// React Flow from re-mounting nodes on every render (causes flicker/disappear)
 const nodeTypes = {
   personNode: PersonNode,
   infoNode: InfoNode,
   interestNode: InterestNode,
   similarNode: SimilarNode,
+  companyNode: CompanyNode,
+  commStyleNode: CommStyleNode,
 };
 
 interface Props {
@@ -53,7 +64,6 @@ const IntelligenceGraphInner = ({
       result.similar_profiles
     );
 
-    // Staggered reveal animation
     let i = 0;
     setNodes([]);
     setEdges([]);
@@ -96,7 +106,6 @@ const IntelligenceGraphInner = ({
     onNodeSelect(null);
   }, [onNodeSelect]);
 
-  // Highlight selected node via className
   const styledNodes = useMemo(
     () =>
       nodes.map((n) => ({
@@ -106,7 +115,6 @@ const IntelligenceGraphInner = ({
     [nodes, selectedNodeId]
   );
 
-  // Empty state
   if (!result && !isLoading) {
     return (
       <div className="h-full flex flex-col items-center justify-center gap-5">
@@ -128,7 +136,6 @@ const IntelligenceGraphInner = ({
     );
   }
 
-  // Loading state
   if (isLoading) {
     return (
       <div className="h-full flex flex-col items-center justify-center gap-6">
@@ -145,10 +152,11 @@ const IntelligenceGraphInner = ({
         </div>
         <div className="space-y-2 text-center">
           {[
-            "Scanning profile signals…",
-            "Mapping relationships…",
-            "Analyzing communication patterns…",
-            "Generating outreach variants…",
+            "Detecting persona…",
+            "Detecting company…",
+            "Mapping interests…",
+            "Generating messages…",
+            "Adding similar personas…",
           ].map((text, i) => (
             <p
               key={i}
