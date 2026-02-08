@@ -16,17 +16,34 @@ export function generateGraphData(
     data: { name: persona.name, role: persona.role },
   });
 
-  // Info nodes arranged radially
+  // Company node
+  nodes.push({
+    id: "company",
+    type: "companyNode",
+    position: { x: -340, y: -200 },
+    data: {
+      name: persona.company,
+      industry: persona.industry,
+      size: "50-200 employees",
+    },
+  });
+  edges.push({
+    id: "e-person-company",
+    source: "person",
+    target: "company",
+    animated: true,
+    style: { stroke: "hsl(220, 90%, 56%)", strokeWidth: 2 },
+  });
+
+  // Info nodes
   const infoNodes = [
     { id: "role", category: "Role", value: persona.role, icon: "briefcase" },
     { id: "industry", category: "Industry", value: persona.industry, icon: "globe" },
-    { id: "tone", category: "Comm. Style", value: `${persona.tone} tone`, icon: "message" },
   ];
 
   const infoPositions = [
-    { x: -280, y: -240 },
-    { x: 160, y: -260 },
-    { x: 300, y: 20 },
+    { x: 180, y: -260 },
+    { x: 300, y: 40 },
   ];
 
   infoNodes.forEach((node, i) => {
@@ -45,12 +62,31 @@ export function generateGraphData(
     });
   });
 
-  // Interest nodes spread across bottom
+  // Communication style node
+  nodes.push({
+    id: "commstyle",
+    type: "commStyleNode",
+    position: { x: -320, y: 60 },
+    data: {
+      tone: persona.tone,
+      likelihood: persona.responseLikelihood,
+      emoji: persona.emojiUsage,
+    },
+  });
+  edges.push({
+    id: "e-person-commstyle",
+    source: "person",
+    target: "commstyle",
+    animated: true,
+    style: { stroke: "hsl(320, 75%, 55%)", strokeWidth: 2 },
+  });
+
+  // Interest nodes
   const interestPositions = [
-    { x: -360, y: 160 },
-    { x: -140, y: 260 },
-    { x: 80, y: 260 },
-    { x: 280, y: 160 },
+    { x: -380, y: 220 },
+    { x: -160, y: 300 },
+    { x: 60, y: 300 },
+    { x: 260, y: 220 },
   ];
 
   persona.interests.forEach((interest, i) => {
@@ -71,11 +107,11 @@ export function generateGraphData(
     });
   });
 
-  // Similar profile nodes at outer ring
+  // Similar profile nodes
   const similarPositions = [
-    { x: -420, y: -100 },
-    { x: -50, y: -400 },
-    { x: 380, y: -140 },
+    { x: -460, y: -60 },
+    { x: -40, y: -400 },
+    { x: 420, y: -100 },
   ];
 
   similarProfiles.forEach((profile, i) => {

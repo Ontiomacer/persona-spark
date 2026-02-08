@@ -8,9 +8,15 @@ export interface GenerateRequest {
 export interface PersonaData {
   name: string;
   role: string;
+  company: string;
   industry: string;
   tone: string;
   interests: string[];
+  location: string;
+  seniority: string;
+  lastActivity: string;
+  emojiUsage: string;
+  responseLikelihood: number;
 }
 
 export interface GenerateResponse {
@@ -25,13 +31,35 @@ export interface GenerateResponse {
   similar_profiles: string[];
 }
 
+export interface HistoryEntry {
+  id: string;
+  persona: PersonaData;
+  messages: {
+    email: string[];
+    linkedin: string[];
+    whatsapp: string[];
+  };
+  subjects: string[];
+  scores: number[];
+  similar_profiles: string[];
+  date: string;
+  channel: string;
+  status: "sent" | "replied" | "pending" | "bounced";
+}
+
 export const MOCK_RESPONSE: GenerateResponse = {
   persona: {
     name: "Arjun Mehta",
     role: "Co-Founder & CEO",
+    company: "NeuralForge AI",
     industry: "AI SaaS",
     tone: "Casual",
     interests: ["Growth Hacking", "LLMs", "Product-Led Growth", "Developer Tools"],
+    location: "San Francisco, CA",
+    seniority: "C-Level Executive",
+    lastActivity: "Posted on LinkedIn 2 days ago",
+    emojiUsage: "Moderate",
+    responseLikelihood: 78,
   },
   messages: {
     email: [
@@ -62,3 +90,139 @@ export const MOCK_RESPONSE: GenerateResponse = {
     "3 AI startup CTOs reached",
   ],
 };
+
+export const MOCK_HISTORY: HistoryEntry[] = [
+  {
+    id: "1",
+    ...MOCK_RESPONSE,
+    date: "2026-02-07",
+    channel: "Email",
+    status: "replied",
+  },
+  {
+    id: "2",
+    persona: {
+      name: "Priya Sharma",
+      role: "VP of Engineering",
+      company: "DataMesh Labs",
+      industry: "Data Infrastructure",
+      tone: "Formal",
+      interests: ["Data Pipelines", "MLOps", "Team Scaling"],
+      location: "Bangalore, India",
+      seniority: "VP-Level",
+      lastActivity: "Published blog post 5 days ago",
+      emojiUsage: "Rare",
+      responseLikelihood: 65,
+    },
+    messages: {
+      email: [
+        "Dear Priya,\n\nYour recent article on building resilient data pipelines was insightful. We're developing an offline intelligence engine that could streamline your team's outreach workflows.\n\nWould you be open to a brief technical discussion?\n\nBest regards",
+      ],
+      linkedin: [
+        "Hi Priya — your work at DataMesh Labs on data infrastructure is impressive. I'd love to share how our local LLM engine approaches personalized outreach without cloud dependencies.",
+      ],
+      whatsapp: [],
+    },
+    subjects: ["Data Infrastructure × Offline AI — A Synergy?"],
+    scores: [72],
+    similar_profiles: ["1 VP Engineering contacted"],
+    date: "2026-02-05",
+    channel: "LinkedIn",
+    status: "sent",
+  },
+  {
+    id: "3",
+    persona: {
+      name: "Marcus Chen",
+      role: "Head of Growth",
+      company: "ScaleUp Ventures",
+      industry: "Venture Capital",
+      tone: "Casual",
+      interests: ["Growth Marketing", "AI Tools", "Startup Ecosystems"],
+      location: "New York, NY",
+      seniority: "Director-Level",
+      lastActivity: "Tweeted 12 hours ago",
+      emojiUsage: "Frequent",
+      responseLikelihood: 82,
+    },
+    messages: {
+      email: [
+        "Hey Marcus,\n\nLove what ScaleUp is doing in the AI tools space. We built an offline outreach engine that's been getting crazy traction with early-stage founders.\n\nThink your portfolio companies would dig this. Quick demo?\n\nCheers",
+      ],
+      linkedin: [
+        "Marcus! 🚀 Your thread on AI growth tools was fire. We're building exactly that — personalized outreach powered by local LLMs. Zero cloud costs. Would love to connect!",
+      ],
+      whatsapp: [
+        "Hey Marcus! Saw your tweet about AI growth tools — we're building something you'd love. Quick chat? 🔥",
+      ],
+    },
+    subjects: ["AI Growth Tools × Your Portfolio 🚀"],
+    scores: [89],
+    similar_profiles: ["4 Growth leaders contacted"],
+    date: "2026-02-06",
+    channel: "Email",
+    status: "pending",
+  },
+  {
+    id: "4",
+    persona: {
+      name: "Sarah Kim",
+      role: "CTO",
+      company: "FinFlow AI",
+      industry: "Fintech",
+      tone: "Balanced",
+      interests: ["AI in Finance", "Compliance", "API Architecture"],
+      location: "London, UK",
+      seniority: "C-Level Executive",
+      lastActivity: "Spoke at conference 1 week ago",
+      emojiUsage: "Moderate",
+      responseLikelihood: 58,
+    },
+    messages: {
+      email: [
+        "Hi Sarah,\n\nYour talk on AI-driven compliance was thought-provoking. We've built an offline LLM engine for outreach that could align with FinFlow's privacy-first approach.\n\nWorth a quick conversation?\n\nBest",
+      ],
+      linkedin: [],
+      whatsapp: [],
+    },
+    subjects: ["Privacy-First AI Outreach for Fintech"],
+    scores: [66],
+    similar_profiles: ["2 Fintech CTOs contacted"],
+    date: "2026-02-03",
+    channel: "Email",
+    status: "bounced",
+  },
+  {
+    id: "5",
+    persona: {
+      name: "Raj Patel",
+      role: "Founder",
+      company: "DevStack.io",
+      industry: "Developer Tools",
+      tone: "Casual",
+      interests: ["Open Source", "DevEx", "Local-First Software"],
+      location: "Austin, TX",
+      seniority: "Founder",
+      lastActivity: "GitHub commit 3 hours ago",
+      emojiUsage: "Moderate",
+      responseLikelihood: 91,
+    },
+    messages: {
+      email: [
+        "Raj! Your open-source work on DevStack is 🔥. Fellow builder here — we made an offline LLM that writes cold outreach as good as a human SDR.\n\nWould love to get a local-first advocate's take on it. 15 mins?\n\nCheers",
+      ],
+      linkedin: [
+        "Hey Raj 👋 Love the local-first philosophy at DevStack. We're building the same thing but for sales outreach — fully offline, fully personalized. Would love to swap notes!",
+      ],
+      whatsapp: [
+        "Raj! Fellow local-first builder here. Made an offline LLM for outreach. Think you'd geek out over it. Quick demo? 🛠️",
+      ],
+    },
+    subjects: ["Local-First × AI Outreach — Let's Geek Out"],
+    scores: [94],
+    similar_profiles: ["3 DevTool founders contacted"],
+    date: "2026-02-07",
+    channel: "WhatsApp",
+    status: "replied",
+  },
+];

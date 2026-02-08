@@ -175,11 +175,12 @@
 }
 
 .intelligence-graph .react-flow__node {
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: filter 0.3s ease;
 }
 
 .intelligence-graph .react-flow__node:hover {
   filter: drop-shadow(0 0 8px hsl(280 80% 60% / 0.4));
+  z-index: 10 !important;
 }
 
 .intelligence-graph .react-flow__node.selected-graph-node {
