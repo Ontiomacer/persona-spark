@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
 import TopNav from "@/components/TopNav";
-import PanelHeader from "@/components/PanelHeader";
 import ProfileInput from "@/components/ProfileInput";
 import ToneSlider from "@/components/ToneSlider";
 import LanguageToggle from "@/components/LanguageToggle";
@@ -9,6 +8,7 @@ import GenerateButton from "@/components/GenerateButton";
 import IntelligenceGraph from "@/components/graph/IntelligenceGraph";
 import RightPanel from "@/components/RightPanel";
 import { GenerateResponse, MOCK_RESPONSE } from "@/types/outreach";
+import { User, Building2, Globe, Briefcase, Zap } from "lucide-react";
 
 const loadingTexts = [
   "Detecting persona…",
@@ -84,44 +84,104 @@ const Index = () => {
       <div className="flex-1 overflow-hidden relative">
         {/* Subtle gradient overlay */}
         <div
-          className="absolute inset-0 opacity-30 pointer-events-none"
+          className="absolute inset-0 opacity-20 pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle at 15% 50%, hsl(280 80% 60% / 0.06) 0%, transparent 50%), radial-gradient(circle at 85% 20%, hsl(220 90% 56% / 0.05) 0%, transparent 50%), radial-gradient(circle at 50% 80%, hsl(320 75% 55% / 0.04) 0%, transparent 50%)",
+              "radial-gradient(circle at 15% 50%, hsl(280 80% 60% / 0.06) 0%, transparent 50%), radial-gradient(circle at 85% 20%, hsl(220 90% 56% / 0.05) 0%, transparent 50%)",
           }}
         />
 
         <div className="relative z-10 h-full flex">
-          {/* LEFT SIDEBAR — Controls */}
-          <div className="w-[280px] shrink-0 h-full border-r border-glass-border bg-surface/80 backdrop-blur-sm overflow-y-auto">
-            <div className="p-5 space-y-5">
-              <PanelHeader />
+          {/* LEFT COLUMN — Profile Input Controls */}
+          <div className="w-[280px] shrink-0 h-full overflow-y-auto p-4 space-y-4">
+            {/* Profile Card */}
+            <div className="glass-card p-4 space-y-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center">
+                  <Zap className="w-4 h-4 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-sm font-semibold text-foreground">Generate Intelligence</h2>
+                  <p className="text-[10px] text-muted-foreground">Paste a profile to analyze</p>
+                </div>
+              </div>
               <div className="h-px bg-glass-border" />
               <ProfileInput value={profileText} onChange={setProfileText} />
+            </div>
+
+            {/* Controls Card */}
+            <div className="glass-card p-4 space-y-4">
               <ToneSlider value={tone} onChange={setTone} />
               <LanguageToggle value={language} onChange={setLanguage} />
               <ChannelSelection selected={channels} onChange={setChannels} />
-              <GenerateButton
-                onClick={handleGenerate}
+            </div>
+
+            {/* Generate */}
+            <GenerateButton
+              onClick={handleGenerate}
+              isLoading={isLoading}
+              loadingText={loadingTexts[loadingTextIdx]}
+              disabled={!profileText.trim() || channels.length === 0}
+            />
+
+            {/* Status badge */}
+            <div className="glass-card p-3 flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: "hsl(142 71% 45%)" }} />
+                <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: "hsl(142 71% 45%)" }} />
+              </span>
+              <span className="text-xs font-medium" style={{ color: "hsl(142 71% 45%)" }}>Running locally</span>
+              <span className="text-[10px] text-muted-foreground ml-auto">Offline LLM</span>
+            </div>
+          </div>
+
+          {/* CENTER — Graph + Profile Header */}
+          <div className="flex-1 h-full flex flex-col min-w-0">
+            {/* Target Profile Header Card */}
+            {result && (
+              <div className="mx-4 mt-4 glass-card p-4 shrink-0">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/80 via-accent/60 to-secondary/70 p-[2px] shadow-lg shadow-primary/20">
+                    <div className="w-full h-full rounded-full bg-background/90 flex items-center justify-center">
+                      <User className="w-6 h-6 text-primary" />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h2 className="text-lg font-bold text-foreground">{result.persona.name}</h2>
+                    <p className="text-sm text-muted-foreground">{result.persona.role} at {result.persona.company}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {[
+                      { icon: Building2, label: result.persona.company, color: "secondary" },
+                      { icon: Globe, label: result.persona.industry, color: "primary" },
+                      { icon: Briefcase, label: result.persona.seniority, color: "accent" },
+                    ].map((tag) => (
+                      <span
+                        key={tag.label}
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border bg-${tag.color}/10 text-${tag.color} border-${tag.color}/20`}
+                      >
+                        <tag.icon className="w-3 h-3" />
+                        {tag.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Intelligence Graph Canvas */}
+            <div className="flex-1 min-h-0">
+              <IntelligenceGraph
+                result={result}
                 isLoading={isLoading}
-                loadingText={loadingTexts[loadingTextIdx]}
-                disabled={!profileText.trim() || channels.length === 0}
+                onNodeSelect={setSelectedNodeId}
+                selectedNodeId={selectedNodeId}
               />
             </div>
           </div>
 
-          {/* CENTER — Intelligence Graph Canvas */}
-          <div className="flex-1 h-full bg-background/40">
-            <IntelligenceGraph
-              result={result}
-              isLoading={isLoading}
-              onNodeSelect={setSelectedNodeId}
-              selectedNodeId={selectedNodeId}
-            />
-          </div>
-
-          {/* RIGHT PANEL — Message Intelligence */}
-          <div className="w-[380px] shrink-0 h-full border-l border-glass-border bg-surface/80 backdrop-blur-sm">
+          {/* RIGHT COLUMN — Messages + Persona */}
+          <div className="w-[360px] shrink-0 h-full border-l border-glass-border overflow-hidden">
             <RightPanel
               result={result}
               selectedNodeId={selectedNodeId}
