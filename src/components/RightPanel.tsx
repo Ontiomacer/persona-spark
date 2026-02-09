@@ -29,11 +29,11 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
   if (isLoading) {
     return (
       <div className="h-full flex flex-col items-center justify-center gap-4 px-6">
-        <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center animate-pulse">
-          <Brain className="w-6 h-6 text-primary" />
+        <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center animate-pulse">
+          <Brain className="w-6 h-6 text-foreground" />
         </div>
         <div className="text-center">
-          <p className="text-sm text-primary font-medium">Generating intelligence…</p>
+          <p className="text-sm text-foreground font-medium">Generating intelligence…</p>
           <p className="text-xs text-muted-foreground mt-1">Analyzing patterns and crafting messages</p>
         </div>
       </div>
@@ -57,9 +57,9 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
   if (!selectedNodeId) {
     return (
       <div className="h-full flex flex-col">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Brain className="w-4 h-4 text-primary" />
+            <Brain className="w-4 h-4 text-muted-foreground" />
             Intelligence Panel
           </h3>
           <p className="text-xs text-muted-foreground mt-1">Click a node on the graph to explore</p>
@@ -74,13 +74,12 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Person node — full intelligence
   if (selectedNodeId === "person") {
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border sticky top-0 bg-surface/95 backdrop-blur-sm z-10">
+        <div className="p-4 border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-10">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Brain className="w-4 h-4 text-primary" />
+            <Brain className="w-4 h-4 text-muted-foreground" />
             Target Intelligence
           </h3>
           <p className="text-xs text-muted-foreground mt-0.5">
@@ -88,7 +87,6 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
           </p>
         </div>
         <div className="p-4 space-y-4">
-          {/* Extended profile */}
           <div className="glass-card p-4 space-y-3">
             <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Full Profile</h4>
             <div className="grid grid-cols-2 gap-2">
@@ -101,7 +99,7 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
                 { icon: Clock, label: "Last Active", value: result.persona.lastActivity },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-2 p-2 rounded-lg bg-muted/30">
-                  <item.icon className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
+                  <item.icon className="w-3.5 h-3.5 text-muted-foreground mt-0.5 shrink-0" />
                   <div>
                     <div className="text-[9px] text-muted-foreground uppercase">{item.label}</div>
                     <div className="text-xs text-foreground leading-tight">{item.value}</div>
@@ -119,13 +117,12 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Company node
   if (selectedNodeId === "company") {
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Building2 className="w-4 h-4 text-secondary" />
+            <Building2 className="w-4 h-4 text-muted-foreground" />
             Company Intelligence
           </h3>
         </div>
@@ -140,7 +137,7 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
                 { label: "Hiring", value: "Actively hiring (3 roles)" },
                 { label: "Funding", value: "Series A — $12M" },
               ].map((item) => (
-                <div key={item.label} className="flex justify-between items-center py-1.5 border-b border-glass-border last:border-0">
+                <div key={item.label} className="flex justify-between items-center py-1.5 border-b border-border last:border-0">
                   <span className="text-xs text-muted-foreground">{item.label}</span>
                   <span className="text-xs text-foreground font-medium flex items-center gap-1">
                     {item.value}
@@ -153,9 +150,9 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
           <div className="glass-card p-4">
             <h4 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Market Position</h4>
             <div className="flex flex-wrap gap-2">
-              <span className="px-2 py-1 rounded-md bg-secondary/10 text-secondary text-xs border border-secondary/20">High Growth</span>
-              <span className="px-2 py-1 rounded-md bg-primary/10 text-primary text-xs border border-primary/20">Tech-Forward</span>
-              <span className="px-2 py-1 rounded-md bg-accent/10 text-accent text-xs border border-accent/20">Competitive</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">High Growth</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">Tech-Forward</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">Competitive</span>
             </div>
           </div>
         </div>
@@ -163,13 +160,12 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Role node
   if (selectedNodeId === "role") {
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Briefcase className="w-4 h-4 text-primary" />
+            <Briefcase className="w-4 h-4 text-muted-foreground" />
             Role Analysis
           </h3>
         </div>
@@ -181,8 +177,8 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
               This role typically has authority over tool selection, partnerships, and strategic initiatives.
             </p>
             <div className="flex flex-wrap gap-2 mt-3">
-              <span className="px-2 py-1 rounded-md bg-primary/10 text-primary text-xs border border-primary/20">High Authority</span>
-              <span className="px-2 py-1 rounded-md bg-secondary/10 text-secondary text-xs border border-secondary/20">Budget Control</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">High Authority</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">Budget Control</span>
             </div>
           </div>
           <div className="glass-card p-4">
@@ -196,13 +192,12 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Industry node
   if (selectedNodeId === "industry") {
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Globe className="w-4 h-4 text-secondary" />
+            <Globe className="w-4 h-4 text-muted-foreground" />
             Industry Context
           </h3>
         </div>
@@ -213,9 +208,9 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
               The {result.persona.industry} industry is rapidly evolving with emphasis on AI-driven automation, personalization at scale, and cost efficiency.
             </p>
             <div className="flex flex-wrap gap-2 mt-3">
-              <span className="px-2 py-1 rounded-md bg-accent/10 text-accent text-xs border border-accent/20">High Growth</span>
-              <span className="px-2 py-1 rounded-md bg-secondary/10 text-secondary text-xs border border-secondary/20">Tech-Forward</span>
-              <span className="px-2 py-1 rounded-md bg-primary/10 text-primary text-xs border border-primary/20">Competitive</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">High Growth</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">Tech-Forward</span>
+              <span className="px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">Competitive</span>
             </div>
           </div>
         </div>
@@ -223,19 +218,18 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Communication style node
   if (selectedNodeId === "commstyle") {
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Radio className="w-4 h-4 text-accent" />
+            <Radio className="w-4 h-4 text-muted-foreground" />
             Communication Style
           </h3>
         </div>
         <div className="p-4 space-y-4">
           <div className="glass-card p-4 space-y-3">
-            <span className="inline-flex px-3 py-1.5 rounded-lg bg-accent/15 text-accent text-sm font-medium border border-accent/25">
+            <span className="inline-flex px-3 py-1.5 rounded-lg bg-muted text-foreground text-sm font-medium border border-border">
               {result.persona.tone} Style
             </span>
             <p className="text-xs text-muted-foreground leading-relaxed">
@@ -246,15 +240,15 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
             <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Communication Signals</h4>
             <div className="space-y-2.5">
               {[
-                { label: "Formality", value: result.persona.tone === "Casual" ? 30 : result.persona.tone === "Formal" ? 85 : 55, color: "bg-accent" },
-                { label: "Directness", value: 75, color: "bg-primary" },
-                { label: "Emoji Usage", value: result.persona.emojiUsage === "Frequent" ? 85 : result.persona.emojiUsage === "Moderate" ? 50 : 15, color: "bg-secondary" },
-                { label: "Response Likelihood", value: result.persona.responseLikelihood, color: "bg-accent" },
+                { label: "Formality", value: result.persona.tone === "Casual" ? 30 : result.persona.tone === "Formal" ? 85 : 55 },
+                { label: "Directness", value: 75 },
+                { label: "Emoji Usage", value: result.persona.emojiUsage === "Frequent" ? 85 : result.persona.emojiUsage === "Moderate" ? 50 : 15 },
+                { label: "Response Likelihood", value: result.persona.responseLikelihood },
               ].map((signal) => (
                 <div key={signal.label} className="flex items-center justify-between gap-3 text-xs">
                   <span className="text-foreground/70 w-32">{signal.label}</span>
                   <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
-                    <div className={`h-full ${signal.color} rounded-full transition-all duration-700`} style={{ width: `${signal.value}%` }} />
+                    <div className="h-full bg-foreground/40 rounded-full transition-all duration-700" style={{ width: `${signal.value}%` }} />
                   </div>
                   <span className="text-muted-foreground w-8 text-right">{signal.value}%</span>
                 </div>
@@ -266,19 +260,18 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Legacy tone node (backward compat)
   if (selectedNodeId === "tone") {
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-accent" />
+            <MessageSquare className="w-4 h-4 text-muted-foreground" />
             Tone Analysis
           </h3>
         </div>
         <div className="p-4 space-y-4">
           <div className="glass-card p-4 space-y-3">
-            <span className="inline-flex px-3 py-1.5 rounded-lg bg-accent/15 text-accent text-sm font-medium border border-accent/25">
+            <span className="inline-flex px-3 py-1.5 rounded-lg bg-muted text-foreground text-sm font-medium border border-border">
               {result.persona.tone} Style
             </span>
           </div>
@@ -287,15 +280,14 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Interest nodes
   if (selectedNodeId.startsWith("interest-")) {
     const idx = parseInt(selectedNodeId.split("-")[1]);
     const interest = result.persona.interests[idx];
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-secondary" />
+            <Sparkles className="w-4 h-4 text-muted-foreground" />
             Interest Signal
           </h3>
         </div>
@@ -305,7 +297,7 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
             <p className="text-xs text-muted-foreground leading-relaxed">
               Detected from profile text. This interest was identified from the target's public communications and can be leveraged as a conversation hook.
             </p>
-            <span className="inline-flex items-center px-2 py-1 rounded-md bg-secondary/10 text-secondary text-xs border border-secondary/20">
+            <span className="inline-flex items-center px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">
               High Relevance
             </span>
           </div>
@@ -320,15 +312,14 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Similar profile nodes
   if (selectedNodeId.startsWith("similar-")) {
     const idx = parseInt(selectedNodeId.split("-")[1]);
     const profile = result.similar_profiles[idx];
     return (
       <div className="h-full overflow-y-auto">
-        <div className="p-4 border-b border-glass-border">
+        <div className="p-4 border-b border-border">
           <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Users className="w-4 h-4 text-accent" />
+            <Users className="w-4 h-4 text-muted-foreground" />
             Memory Match
           </h3>
         </div>
@@ -338,7 +329,7 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
             <p className="text-xs text-muted-foreground leading-relaxed">
               Similar profiles from past outreach campaigns. Patterns from these interactions were used to optimize current messages.
             </p>
-            <span className="inline-flex items-center px-2 py-1 rounded-md bg-accent/10 text-accent text-xs border border-accent/20">
+            <span className="inline-flex items-center px-2 py-1 rounded-md bg-muted text-foreground text-xs border border-border">
               Pattern Applied
             </span>
           </div>
@@ -353,7 +344,6 @@ const RightPanel = ({ result, selectedNodeId, isLoading }: RightPanelProps) => {
     );
   }
 
-  // Fallback
   return (
     <div className="h-full flex items-center justify-center px-6">
       <p className="text-xs text-muted-foreground/50">Select a node to see details</p>

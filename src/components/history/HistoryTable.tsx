@@ -13,11 +13,11 @@ const channelIcon: Record<string, React.FC<{ className?: string }>> = {
   WhatsApp: MessageSquare,
 };
 
-const statusColors: Record<string, string> = {
-  replied: "bg-emerald-500/15 text-emerald-400 border-emerald-500/25",
-  sent: "bg-secondary/15 text-secondary border-secondary/25",
-  pending: "bg-amber-500/15 text-amber-400 border-amber-500/25",
-  bounced: "bg-destructive/15 text-destructive border-destructive/25",
+const statusStyles: Record<string, string> = {
+  replied: "bg-muted text-foreground border-border",
+  sent: "bg-muted text-foreground border-border",
+  pending: "bg-muted text-muted-foreground border-border",
+  bounced: "bg-muted text-muted-foreground border-border",
 };
 
 const HistoryTable = ({ entries, selectedId, onSelect }: HistoryTableProps) => {
@@ -33,7 +33,7 @@ const HistoryTable = ({ entries, selectedId, onSelect }: HistoryTableProps) => {
       <div className="glass-card overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-glass-border">
+            <tr className="border-b border-border">
               {["Name", "Role", "Company", "Channel", "Score", "Status", "Date", ""].map(
                 (header) => (
                   <th
@@ -54,21 +54,15 @@ const HistoryTable = ({ entries, selectedId, onSelect }: HistoryTableProps) => {
                 <tr
                   key={entry.id}
                   onClick={() => onSelect(entry)}
-                  className={`border-b border-glass-border/50 cursor-pointer transition-colors hover:bg-muted/30 ${
-                    isSelected ? "bg-primary/5" : ""
+                  className={`border-b border-border/50 cursor-pointer transition-colors hover:bg-muted/30 ${
+                    isSelected ? "bg-muted/40" : ""
                   }`}
                 >
                   <td className="px-4 py-3">
-                    <span className="text-sm font-medium text-foreground">
-                      {entry.persona.name}
-                    </span>
+                    <span className="text-sm font-medium text-foreground">{entry.persona.name}</span>
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">
-                    {entry.persona.role}
-                  </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">
-                    {entry.persona.company}
-                  </td>
+                  <td className="px-4 py-3 text-xs text-muted-foreground">{entry.persona.role}</td>
+                  <td className="px-4 py-3 text-xs text-muted-foreground">{entry.persona.company}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1.5">
                       <ChannelIcon className="w-3.5 h-3.5 text-muted-foreground" />
@@ -76,22 +70,14 @@ const HistoryTable = ({ entries, selectedId, onSelect }: HistoryTableProps) => {
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="text-xs font-mono text-primary font-medium">
-                      {entry.scores[0]}%
-                    </span>
+                    <span className="text-xs font-mono text-foreground font-medium">{entry.scores[0]}%</span>
                   </td>
                   <td className="px-4 py-3">
-                    <span
-                      className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${
-                        statusColors[entry.status]
-                      }`}
-                    >
+                    <span className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${statusStyles[entry.status]}`}>
                       {entry.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground font-mono">
-                    {entry.date}
-                  </td>
+                  <td className="px-4 py-3 text-xs text-muted-foreground font-mono">{entry.date}</td>
                   <td className="px-4 py-3">
                     <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/40" />
                   </td>

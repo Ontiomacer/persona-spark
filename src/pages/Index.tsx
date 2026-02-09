@@ -79,44 +79,32 @@ const Index = () => {
   }, [profileText, tone, language, channels, toneLabel]);
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-background flex flex-col">
+    <div className="h-screen w-screen overflow-hidden bg-background flex flex-col transition-colors duration-200">
       <TopNav />
       <div className="flex-1 overflow-hidden relative">
-        {/* Subtle gradient overlay */}
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle at 15% 50%, hsl(280 80% 60% / 0.06) 0%, transparent 50%), radial-gradient(circle at 85% 20%, hsl(220 90% 56% / 0.05) 0%, transparent 50%)",
-          }}
-        />
-
         <div className="relative z-10 h-full flex">
-          {/* LEFT COLUMN — Profile Input Controls */}
+          {/* LEFT COLUMN */}
           <div className="w-[280px] shrink-0 h-full overflow-y-auto p-4 space-y-4">
-            {/* Profile Card */}
             <div className="glass-card p-4 space-y-4">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-primary" />
+                <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+                  <Zap className="w-4 h-4 text-foreground" />
                 </div>
                 <div>
                   <h2 className="text-sm font-semibold text-foreground">Generate Intelligence</h2>
                   <p className="text-[10px] text-muted-foreground">Paste a profile to analyze</p>
                 </div>
               </div>
-              <div className="h-px bg-glass-border" />
+              <div className="h-px bg-border" />
               <ProfileInput value={profileText} onChange={setProfileText} />
             </div>
 
-            {/* Controls Card */}
             <div className="glass-card p-4 space-y-4">
               <ToneSlider value={tone} onChange={setTone} />
               <LanguageToggle value={language} onChange={setLanguage} />
               <ChannelSelection selected={channels} onChange={setChannels} />
             </div>
 
-            {/* Generate */}
             <GenerateButton
               onClick={handleGenerate}
               isLoading={isLoading}
@@ -124,26 +112,24 @@ const Index = () => {
               disabled={!profileText.trim() || channels.length === 0}
             />
 
-            {/* Status badge */}
             <div className="glass-card p-3 flex items-center gap-2">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: "hsl(142 71% 45%)" }} />
-                <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: "hsl(142 71% 45%)" }} />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground/30 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-foreground/40" />
               </span>
-              <span className="text-xs font-medium" style={{ color: "hsl(142 71% 45%)" }}>Running locally</span>
+              <span className="text-xs font-medium text-muted-foreground">Running locally</span>
               <span className="text-[10px] text-muted-foreground ml-auto">Offline LLM</span>
             </div>
           </div>
 
-          {/* CENTER — Graph + Profile Header */}
+          {/* CENTER */}
           <div className="flex-1 h-full flex flex-col min-w-0">
-            {/* Target Profile Header Card */}
             {result && (
               <div className="mx-4 mt-4 glass-card p-4 shrink-0">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/80 via-accent/60 to-secondary/70 p-[2px] shadow-lg shadow-primary/20">
-                    <div className="w-full h-full rounded-full bg-background/90 flex items-center justify-center">
-                      <User className="w-6 h-6 text-primary" />
+                  <div className="w-14 h-14 rounded-full border-2 border-foreground/15 bg-card p-[2px]">
+                    <div className="w-full h-full rounded-full bg-muted flex items-center justify-center">
+                      <User className="w-6 h-6 text-foreground" />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -152,13 +138,13 @@ const Index = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     {[
-                      { icon: Building2, label: result.persona.company, color: "secondary" },
-                      { icon: Globe, label: result.persona.industry, color: "primary" },
-                      { icon: Briefcase, label: result.persona.seniority, color: "accent" },
+                      { icon: Building2, label: result.persona.company },
+                      { icon: Globe, label: result.persona.industry },
+                      { icon: Briefcase, label: result.persona.seniority },
                     ].map((tag) => (
                       <span
                         key={tag.label}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border bg-${tag.color}/10 text-${tag.color} border-${tag.color}/20`}
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border border-border bg-muted text-foreground"
                       >
                         <tag.icon className="w-3 h-3" />
                         {tag.label}
@@ -168,8 +154,6 @@ const Index = () => {
                 </div>
               </div>
             )}
-
-            {/* Intelligence Graph Canvas */}
             <div className="flex-1 min-h-0">
               <IntelligenceGraph
                 result={result}
@@ -180,8 +164,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN — Messages + Persona */}
-          <div className="w-[360px] shrink-0 h-full border-l border-glass-border overflow-hidden">
+          {/* RIGHT COLUMN */}
+          <div className="w-[360px] shrink-0 h-full border-l border-border overflow-hidden">
             <RightPanel
               result={result}
               selectedNodeId={selectedNodeId}

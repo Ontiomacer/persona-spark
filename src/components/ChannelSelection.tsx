@@ -30,14 +30,14 @@ const ChannelSelection = ({ selected, onChange }: ChannelSelectionProps) => {
             onClick={() => toggle(id)}
             className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border ${
               selected.includes(id)
-                ? "bg-primary/10 border-primary/30 text-foreground"
-                : "bg-input/30 border-glass-border text-muted-foreground hover:border-primary/20 hover:text-foreground"
+                ? "bg-muted border-foreground/20 text-foreground"
+                : "bg-input/30 border-border text-muted-foreground hover:border-foreground/15 hover:text-foreground"
             }`}
           >
             <div
               className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
                 selected.includes(id)
-                  ? "border-primary bg-primary"
+                  ? "border-foreground bg-foreground"
                   : "border-muted-foreground/40"
               }`}
             >

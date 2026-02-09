@@ -15,12 +15,12 @@ const GenerateButton = ({ onClick, isLoading, loadingText, disabled }: GenerateB
       className={`
         w-full py-3 rounded-xl font-semibold text-sm
         flex items-center justify-center gap-2
-        transition-all duration-300
+        transition-all duration-200
         ${isLoading
-          ? "bg-primary/25 text-primary border border-primary/30 animate-pulse-glow cursor-wait"
-          : "bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98]"
+          ? "bg-muted text-muted-foreground border border-border cursor-wait"
+          : "bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98]"
         }
-        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none
+        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
       `}
     >
       {isLoading ? (
