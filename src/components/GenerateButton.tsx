@@ -13,14 +13,14 @@ const GenerateButton = ({ onClick, isLoading, loadingText, disabled }: GenerateB
       onClick={onClick}
       disabled={disabled || isLoading}
       className={`
-        w-full py-3.5 rounded-lg font-semibold text-sm
+        w-full py-3 rounded-xl font-semibold text-sm
         flex items-center justify-center gap-2
         transition-all duration-300
         ${isLoading
-          ? "bg-primary/30 text-primary animate-pulse-glow cursor-wait"
-          : "bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-primary-foreground hover:animate-gradient-shift glow-primary hover:scale-[1.02] active:scale-[0.98]"
+          ? "bg-primary/25 text-primary border border-primary/30 animate-pulse-glow cursor-wait"
+          : "bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98]"
         }
-        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
+        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none
       `}
     >
       {isLoading ? (
@@ -31,7 +31,7 @@ const GenerateButton = ({ onClick, isLoading, loadingText, disabled }: GenerateB
       ) : (
         <>
           <Sparkles className="w-4 h-4" />
-          <span>Generate Outreach</span>
+          <span>Generate Intelligence</span>
         </>
       )}
     </button>
