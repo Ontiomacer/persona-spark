@@ -23,15 +23,14 @@ const MessageTabs = ({ data }: MessageTabsProps) => {
 
   return (
     <div className="space-y-4">
-      {/* Tab bar */}
-      <div className="flex gap-1 p-1 rounded-lg bg-muted/30 border border-glass-border">
+      <div className="flex gap-1 p-1 rounded-lg bg-muted/30 border border-border">
         {tabs.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActiveTab(id)}
             className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
               activeTab === id
-                ? "bg-primary/15 text-primary shadow-sm"
+                ? "bg-muted text-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
             }`}
           >
@@ -41,7 +40,6 @@ const MessageTabs = ({ data }: MessageTabsProps) => {
         ))}
       </div>
 
-      {/* Messages */}
       <div className="space-y-3">
         {messages.map((msg, i) => (
           <MessageCard
@@ -54,7 +52,6 @@ const MessageTabs = ({ data }: MessageTabsProps) => {
         ))}
       </div>
 
-      {/* Subject lines for email */}
       {activeTab === "email" && <SubjectLines subjects={data.subjects} />}
     </div>
   );

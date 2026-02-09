@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface ProfileInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -17,7 +15,7 @@ const ProfileInput = ({ value, onChange }: ProfileInputProps) => {
           value={value}
           onChange={(e) => onChange(e.target.value.slice(0, maxChars))}
           placeholder="Paste LinkedIn profile, bio, or notes about the person…"
-          className="w-full h-32 px-4 py-3 bg-input/50 border border-glass-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all duration-200"
+          className="w-full h-32 px-4 py-3 bg-input/50 border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-2 focus:ring-ring/50 focus:border-ring/50 transition-all duration-200"
         />
         <div className="absolute bottom-2 right-3 text-xs text-muted-foreground font-mono">
           {charCount}/{maxChars}

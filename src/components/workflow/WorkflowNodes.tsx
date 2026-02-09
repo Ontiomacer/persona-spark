@@ -10,49 +10,37 @@ import {
   Clock,
   GitBranch,
   Zap,
+  Check,
 } from "lucide-react";
 
-const nodeStyles: Record<string, { bg: string; border: string; icon: React.FC<{ className?: string }> }> = {
-  input: { bg: "bg-primary/15", border: "border-primary/30", icon: User },
-  persona: { bg: "bg-accent/15", border: "border-accent/30", icon: Brain },
-  message: { bg: "bg-secondary/15", border: "border-secondary/30", icon: MessageSquare },
-  email: { bg: "bg-primary/15", border: "border-primary/30", icon: Mail },
-  linkedin: { bg: "bg-secondary/15", border: "border-secondary/30", icon: Linkedin },
-  send: { bg: "bg-emerald-500/15", border: "border-emerald-500/30", icon: Send },
-  delay: { bg: "bg-amber-500/15", border: "border-amber-500/30", icon: Clock },
-  condition: { bg: "bg-accent/15", border: "border-accent/30", icon: GitBranch },
-};
-
-const iconColorMap: Record<string, string> = {
-  input: "text-primary",
-  persona: "text-accent",
-  message: "text-secondary",
-  email: "text-primary",
-  linkedin: "text-secondary",
-  send: "text-emerald-400",
-  delay: "text-amber-400",
-  condition: "text-accent",
+const iconMap: Record<string, React.FC<{ className?: string }>> = {
+  input: User,
+  persona: Brain,
+  message: MessageSquare,
+  email: Mail,
+  linkedin: Linkedin,
+  send: Send,
+  delay: Clock,
+  condition: GitBranch,
 };
 
 export const WorkflowNode = memo(({ data }: any) => {
-  const style = nodeStyles[data.nodeType] || nodeStyles.input;
-  const Icon = style.icon;
-  const iconColor = iconColorMap[data.nodeType] || "text-primary";
+  const Icon = iconMap[data.nodeType] || User;
   const isRunning = data.running;
   const isDone = data.done;
 
   return (
     <div
-      className={`glass-card px-4 py-3 min-w-[160px] cursor-pointer transition-all duration-300 ${
-        isRunning ? "ring-2 ring-primary/50 animate-pulse" : ""
-      } ${isDone ? "ring-2 ring-emerald-500/40" : ""}`}
+      className={`glass-card px-4 py-3 min-w-[160px] cursor-pointer transition-all duration-200 ${
+        isRunning ? "ring-2 ring-foreground/30 animate-pulse" : ""
+      } ${isDone ? "ring-2 ring-foreground/20" : ""}`}
     >
       <div className="flex items-center gap-3">
-        <div className={`w-8 h-8 rounded-lg ${style.bg} flex items-center justify-center shrink-0`}>
+        <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center shrink-0">
           {isRunning ? (
-            <Zap className={`w-4 h-4 ${iconColor} animate-pulse`} />
+            <Zap className="w-4 h-4 text-foreground animate-pulse" />
           ) : (
-            <Icon className={`w-4 h-4 ${iconColor}`} />
+            <Icon className="w-4 h-4 text-foreground" />
           )}
         </div>
         <div>
@@ -61,10 +49,12 @@ export const WorkflowNode = memo(({ data }: any) => {
         </div>
       </div>
       {isDone && (
-        <div className="mt-2 text-[9px] text-emerald-400 font-mono">✓ Complete</div>
+        <div className="mt-2 text-[9px] text-muted-foreground font-mono flex items-center gap-1">
+          <Check className="w-3 h-3" /> Complete
+        </div>
       )}
-      <Handle type="target" position={Position.Left} className="!w-2 !h-2 !bg-primary/60 !border-primary/40" />
-      <Handle type="source" position={Position.Right} className="!w-2 !h-2 !bg-primary/60 !border-primary/40" />
+      <Handle type="target" position={Position.Left} className="!w-2 !h-2 !bg-foreground/40 !border-foreground/20" />
+      <Handle type="source" position={Position.Right} className="!w-2 !h-2 !bg-foreground/40 !border-foreground/20" />
     </div>
   );
 });

@@ -23,8 +23,6 @@ import { generateGraphData } from "./graphUtils";
 import { GenerateResponse } from "@/types/outreach";
 import { Network, Loader2 } from "lucide-react";
 
-// CRITICAL: nodeTypes must be defined outside the component to prevent
-// React Flow from re-mounting nodes on every render (causes flicker/disappear)
 const nodeTypes = {
   personNode: PersonNode,
   infoNode: InfoNode,
@@ -118,11 +116,8 @@ const IntelligenceGraphInner = ({
   if (!result && !isLoading) {
     return (
       <div className="h-full flex flex-col items-center justify-center gap-5">
-        <div className="relative">
-          <div className="absolute inset-0 w-24 h-24 rounded-full bg-primary/5 blur-xl animate-pulse-glow" />
-          <div className="relative w-24 h-24 rounded-full border-2 border-dashed border-muted-foreground/15 flex items-center justify-center">
-            <Network className="w-10 h-10 text-muted-foreground/20" />
-          </div>
+        <div className="relative w-24 h-24 rounded-full border-2 border-dashed border-muted-foreground/15 flex items-center justify-center">
+          <Network className="w-10 h-10 text-muted-foreground/20" />
         </div>
         <div className="text-center space-y-1.5">
           <p className="text-sm text-muted-foreground/40 font-medium">
@@ -139,16 +134,11 @@ const IntelligenceGraphInner = ({
   if (isLoading) {
     return (
       <div className="h-full flex flex-col items-center justify-center gap-6">
-        <div className="relative">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary via-accent to-secondary opacity-20 animate-pulse-glow blur-2xl absolute -inset-2" />
-          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary/60 via-accent/40 to-secondary/50 p-[2px] animate-float">
-            <div className="w-full h-full rounded-full bg-background/85 backdrop-blur-sm flex items-center justify-center">
-              <Loader2
-                className="w-8 h-8 text-primary animate-spin"
-                style={{ animationDuration: "2s" }}
-              />
-            </div>
-          </div>
+        <div className="relative w-24 h-24 rounded-full border-2 border-foreground/10 bg-muted flex items-center justify-center">
+          <Loader2
+            className="w-8 h-8 text-foreground animate-spin"
+            style={{ animationDuration: "2s" }}
+          />
         </div>
         <div className="space-y-2 text-center">
           {[
@@ -192,13 +182,13 @@ const IntelligenceGraphInner = ({
     >
       <Background
         variant={BackgroundVariant.Dots}
-        color="hsl(280 80% 60% / 0.07)"
+        color="hsl(0 0% 30% / 0.15)"
         gap={30}
         size={1.2}
       />
       <Controls
         showInteractive={false}
-        className="!bg-card/80 !border-glass-border !rounded-lg !shadow-lg [&>button]:!bg-muted/40 [&>button]:!border-glass-border [&>button]:!text-muted-foreground [&>button:hover]:!bg-primary/20 [&>button:hover]:!text-foreground [&>button]:!w-7 [&>button]:!h-7"
+        className="!bg-card/80 !border-border !rounded-lg !shadow-lg [&>button]:!bg-muted/40 [&>button]:!border-border [&>button]:!text-muted-foreground [&>button:hover]:!bg-muted [&>button:hover]:!text-foreground [&>button]:!w-7 [&>button]:!h-7"
       />
     </ReactFlow>
   );

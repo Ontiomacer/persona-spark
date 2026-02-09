@@ -10,7 +10,7 @@ const ToneSlider = ({ value, onChange }: ToneSliderProps) => {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <label className="text-sm font-medium text-foreground">Tone Control</label>
-        <span className="text-xs font-mono px-2 py-0.5 rounded-md bg-primary/15 text-primary border border-primary/20">
+        <span className="text-xs font-mono px-2 py-0.5 rounded-md bg-muted text-foreground border border-border">
           {toneLabel}
         </span>
       </div>
@@ -26,12 +26,11 @@ const ToneSlider = ({ value, onChange }: ToneSliderProps) => {
             [&::-webkit-slider-thumb]:w-4
             [&::-webkit-slider-thumb]:h-4
             [&::-webkit-slider-thumb]:rounded-full
-            [&::-webkit-slider-thumb]:bg-primary
-            [&::-webkit-slider-thumb]:shadow-[0_0_10px_hsl(280_80%_60%/0.5)]
+            [&::-webkit-slider-thumb]:bg-foreground
             [&::-webkit-slider-thumb]:cursor-pointer
             [&::-webkit-slider-thumb]:transition-shadow
             [&::-webkit-slider-thumb]:duration-200
-            [&::-webkit-slider-thumb]:hover:shadow-[0_0_16px_hsl(280_80%_60%/0.7)]"
+            [&::-webkit-slider-thumb]:hover:shadow-[0_0_8px_hsl(0_0%_50%/0.4)]"
         />
         <div className="flex justify-between mt-1">
           <span className="text-xs text-muted-foreground">Formal</span>

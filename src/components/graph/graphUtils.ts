@@ -1,6 +1,9 @@
 import type { Node, Edge } from "@xyflow/react";
 import { PersonaData } from "@/types/outreach";
 
+const edgeColor = "hsl(0, 0%, 45%)";
+const edgeColorLight = "hsl(0, 0%, 35%)";
+
 export function generateGraphData(
   persona: PersonaData,
   similarProfiles: string[]
@@ -8,7 +11,6 @@ export function generateGraphData(
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  // Central person node
   nodes.push({
     id: "person",
     type: "personNode",
@@ -16,7 +18,6 @@ export function generateGraphData(
     data: { name: persona.name, role: persona.role },
   });
 
-  // Company node
   nodes.push({
     id: "company",
     type: "companyNode",
@@ -32,10 +33,9 @@ export function generateGraphData(
     source: "person",
     target: "company",
     animated: true,
-    style: { stroke: "hsl(220, 90%, 56%)", strokeWidth: 2 },
+    style: { stroke: edgeColor, strokeWidth: 2 },
   });
 
-  // Info nodes
   const infoNodes = [
     { id: "role", category: "Role", value: persona.role, icon: "briefcase" },
     { id: "industry", category: "Industry", value: persona.industry, icon: "globe" },
@@ -58,11 +58,10 @@ export function generateGraphData(
       source: "person",
       target: node.id,
       animated: true,
-      style: { stroke: "hsl(280, 80%, 60%)", strokeWidth: 2 },
+      style: { stroke: edgeColor, strokeWidth: 2 },
     });
   });
 
-  // Communication style node
   nodes.push({
     id: "commstyle",
     type: "commStyleNode",
@@ -78,10 +77,9 @@ export function generateGraphData(
     source: "person",
     target: "commstyle",
     animated: true,
-    style: { stroke: "hsl(320, 75%, 55%)", strokeWidth: 2 },
+    style: { stroke: edgeColor, strokeWidth: 2 },
   });
 
-  // Interest nodes
   const interestPositions = [
     { x: -380, y: 220 },
     { x: -160, y: 300 },
@@ -103,11 +101,10 @@ export function generateGraphData(
       source: "person",
       target: id,
       animated: true,
-      style: { stroke: "hsl(220, 90%, 56%)", strokeWidth: 1.5 },
+      style: { stroke: edgeColor, strokeWidth: 1.5 },
     });
   });
 
-  // Similar profile nodes
   const similarPositions = [
     { x: -460, y: -60 },
     { x: -40, y: -400 },
@@ -128,7 +125,7 @@ export function generateGraphData(
       source: "person",
       target: id,
       animated: true,
-      style: { stroke: "hsl(320, 75%, 55%)", strokeWidth: 1, opacity: 0.5 },
+      style: { stroke: edgeColor, strokeWidth: 1, opacity: 0.5 },
     });
   });
 

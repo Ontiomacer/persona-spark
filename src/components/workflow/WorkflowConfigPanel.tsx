@@ -24,12 +24,7 @@ const configFields: Record<string, { label: string; fields: { name: string; type
       { name: "language", type: "select", placeholder: "English / Hinglish" },
     ],
   },
-  persona: {
-    label: "Persona Analysis",
-    fields: [
-      { name: "extract", type: "text", placeholder: "Auto-extract persona from input" },
-    ],
-  },
+  persona: { label: "Persona Analysis", fields: [{ name: "extract", type: "text", placeholder: "Auto-extract persona from input" }] },
   message: {
     label: "Message Generator",
     fields: [
@@ -48,7 +43,7 @@ const configFields: Record<string, { label: string; fields: { name: string; type
 const WorkflowConfigPanel = ({ selectedNode }: WorkflowConfigPanelProps) => {
   if (!selectedNode) {
     return (
-      <div className="w-[280px] shrink-0 h-full border-l border-glass-border bg-surface/80 backdrop-blur-sm flex items-center justify-center">
+      <div className="w-[280px] shrink-0 h-full border-l border-border bg-card/80 backdrop-blur-sm flex items-center justify-center">
         <div className="text-center px-6">
           <div className="w-10 h-10 rounded-full border border-dashed border-muted-foreground/15 flex items-center justify-center mx-auto mb-3">
             <GitBranch className="w-5 h-5 text-muted-foreground/20" />
@@ -64,10 +59,10 @@ const WorkflowConfigPanel = ({ selectedNode }: WorkflowConfigPanelProps) => {
   const Icon = iconMap[nodeType] || User;
 
   return (
-    <div className="w-[280px] shrink-0 h-full border-l border-glass-border bg-surface/80 backdrop-blur-sm overflow-y-auto">
-      <div className="p-4 border-b border-glass-border">
+    <div className="w-[280px] shrink-0 h-full border-l border-border bg-card/80 backdrop-blur-sm overflow-y-auto">
+      <div className="p-4 border-b border-border">
         <div className="flex items-center gap-2">
-          <Icon className="w-4 h-4 text-primary" />
+          <Icon className="w-4 h-4 text-foreground" />
           <h3 className="text-sm font-semibold text-foreground">{config.label}</h3>
         </div>
         <p className="text-[10px] text-muted-foreground mt-1">Node ID: {selectedNode.id}</p>
@@ -80,14 +75,14 @@ const WorkflowConfigPanel = ({ selectedNode }: WorkflowConfigPanelProps) => {
             </label>
             {field.type === "textarea" ? (
               <textarea
-                className="w-full bg-muted/40 border border-glass-border rounded-lg px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/40 resize-none h-20"
+                className="w-full bg-muted/40 border border-border rounded-lg px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground/20 resize-none h-20"
                 placeholder={field.placeholder}
                 readOnly
               />
             ) : (
               <input
                 type="text"
-                className="w-full bg-muted/40 border border-glass-border rounded-lg px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/40"
+                className="w-full bg-muted/40 border border-border rounded-lg px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground/20"
                 placeholder={field.placeholder}
                 readOnly
               />
