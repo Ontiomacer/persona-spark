@@ -21,10 +21,10 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
 
 export const PersonNode = memo(({ data }: any) => (
   <div className="relative group cursor-pointer">
-    <div className="relative w-28 h-28 rounded-full border-2 border-foreground/20 bg-background p-[2px] shadow-lg shadow-foreground/5 group-hover:border-foreground/40 transition-colors duration-200">
+    <div className="relative w-28 h-28 rounded-full border-2 border-blue-400/50 bg-background p-[2px] shadow-lg shadow-blue-500/20 group-hover:border-blue-400/80 transition-colors duration-200">
       <div className="w-full h-full rounded-full bg-card flex flex-col items-center justify-center text-center">
-        <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center mb-1">
-          <User className="w-5 h-5 text-foreground" />
+        <div className="w-9 h-9 rounded-full bg-blue-500/20 flex items-center justify-center mb-1">
+          <User className="w-5 h-5 text-blue-400" />
         </div>
         <span className="text-[11px] font-bold text-foreground leading-tight px-2 truncate max-w-[100px]">
           {data.name}
@@ -45,9 +45,9 @@ PersonNode.displayName = "PersonNode";
 export const InfoNode = memo(({ data }: any) => {
   const Icon = iconMap[data.icon] || Globe;
   return (
-    <div className="glass-card px-4 py-3 flex items-center gap-3 cursor-pointer hover:border-foreground/20 transition-colors duration-200 min-w-[140px] group">
-      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center shrink-0 group-hover:bg-muted/80 transition-colors">
-        <Icon className="w-4 h-4 text-foreground" />
+    <div className="glass-card px-4 py-3 flex items-center gap-3 cursor-pointer hover:border-cyan-400/30 border-cyan-500/20 transition-colors duration-200 min-w-[140px] group">
+      <div className="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center shrink-0 group-hover:bg-cyan-500/25 transition-colors">
+        <Icon className="w-4 h-4 text-cyan-400" />
       </div>
       <div>
         <div className="text-[9px] text-muted-foreground uppercase tracking-widest font-medium">
@@ -65,10 +65,10 @@ export const InfoNode = memo(({ data }: any) => {
 InfoNode.displayName = "InfoNode";
 
 export const CompanyNode = memo(({ data }: any) => (
-  <div className="glass-card px-4 py-3 cursor-pointer hover:border-foreground/20 transition-colors duration-200 min-w-[160px] group">
+  <div className="glass-card px-4 py-3 cursor-pointer hover:border-amber-400/30 border-amber-500/20 transition-colors duration-200 min-w-[160px] group">
     <div className="flex items-center gap-3 mb-2">
-      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center shrink-0 group-hover:bg-muted/80 transition-colors">
-        <Building2 className="w-4 h-4 text-foreground" />
+      <div className="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center shrink-0 group-hover:bg-amber-500/25 transition-colors">
+        <Building2 className="w-4 h-4 text-amber-400" />
       </div>
       <div>
         <div className="text-[9px] text-muted-foreground uppercase tracking-widest font-medium">Company</div>
@@ -92,10 +92,10 @@ export const CompanyNode = memo(({ data }: any) => (
 CompanyNode.displayName = "CompanyNode";
 
 export const CommStyleNode = memo(({ data }: any) => (
-  <div className="glass-card px-4 py-3 cursor-pointer hover:border-foreground/20 transition-colors duration-200 min-w-[150px] group">
+  <div className="glass-card px-4 py-3 cursor-pointer hover:border-violet-400/30 border-violet-500/20 transition-colors duration-200 min-w-[150px] group">
     <div className="flex items-center gap-3 mb-2">
-      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center shrink-0 group-hover:bg-muted/80 transition-colors">
-        <Radio className="w-4 h-4 text-foreground" />
+      <div className="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center shrink-0 group-hover:bg-violet-500/25 transition-colors">
+        <Radio className="w-4 h-4 text-violet-400" />
       </div>
       <div>
         <div className="text-[9px] text-muted-foreground uppercase tracking-widest font-medium">Comm Style</div>
@@ -108,7 +108,7 @@ export const CommStyleNode = memo(({ data }: any) => (
         <span className="text-foreground">{data.likelihood}%</span>
       </div>
       <div className="h-1 bg-muted rounded-full overflow-hidden">
-        <div className="h-full bg-foreground/40 rounded-full" style={{ width: `${data.likelihood}%` }} />
+        <div className="h-full bg-violet-400/60 rounded-full" style={{ width: `${data.likelihood}%` }} />
       </div>
     </div>
     <Handle type="target" position={Position.Bottom} className="!opacity-0 !w-1 !h-1" />
@@ -120,8 +120,8 @@ export const CommStyleNode = memo(({ data }: any) => (
 CommStyleNode.displayName = "CommStyleNode";
 
 export const InterestNode = memo(({ data }: any) => (
-  <div className="px-4 py-2 rounded-full bg-muted border border-border text-xs font-medium text-foreground cursor-pointer hover:bg-accent hover:border-foreground/20 transition-colors duration-200 flex items-center gap-1.5 shadow-sm">
-    <Sparkles className="w-3 h-3 text-muted-foreground" />
+  <div className="px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-xs font-medium text-emerald-300 cursor-pointer hover:bg-emerald-500/20 hover:border-emerald-400/40 transition-colors duration-200 flex items-center gap-1.5 shadow-sm">
+    <Sparkles className="w-3 h-3 text-emerald-400" />
     <span className="whitespace-nowrap">{data.label}</span>
     <Handle type="target" position={Position.Top} className="!opacity-0 !w-1 !h-1" />
     <Handle type="target" position={Position.Left} id="left-target" className="!opacity-0 !w-1 !h-1" />
@@ -131,9 +131,9 @@ export const InterestNode = memo(({ data }: any) => (
 InterestNode.displayName = "InterestNode";
 
 export const SimilarNode = memo(({ data }: any) => (
-  <div className="glass-card px-3 py-2 flex items-center gap-2 cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-200 text-xs hover:border-foreground/20">
-    <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center shrink-0">
-      <Users className="w-3 h-3 text-muted-foreground" />
+  <div className="glass-card px-3 py-2 flex items-center gap-2 cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-200 text-xs hover:border-rose-400/30 border-rose-500/15">
+    <div className="w-5 h-5 rounded-full bg-rose-500/15 flex items-center justify-center shrink-0">
+      <Users className="w-3 h-3 text-rose-400" />
     </div>
     <span className="text-muted-foreground whitespace-nowrap">{data.label}</span>
     <Handle type="target" position={Position.Bottom} className="!opacity-0 !w-1 !h-1" />
